@@ -2,49 +2,33 @@ import streamlit as st
 import requests
 import json
 
-st.title("📂 Load & Download Workflows from GitHub")
+st.title("n8n Workflow Loader")
 
-# 👇 replace with your repo and path
-owner = "user"
-repo = "repo"
-path = "workflows"  # folder containing JSON files
-branch = "main"
+# GitHub raw base URL
+base_url = "https://raw.githubusercontent.com/entremotivator/Toolkitflow/main/"
 
-# GitHub API to list files in a repo folder
-api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}?ref={branch}"
+# JSON file path in repo
+file_path = "mainToolkitflow/08b1gIbnNFYMbzhf.json"
 
-response = requests.get(api_url)
+# Full URL to raw file
+url = base_url + file_path
 
+# Fetch JSON from GitHub
+response = requests.get(url)
 if response.status_code == 200:
-    files = response.json()
+    workflow_data = response.json()
 
-    json_files = [f for f in files if f["name"].endswith(".json")]
+    # Show JSON in expander
+    with st.expander("08b1gIbnNFYMbzhf.json"):
+        st.json(workflow_data)
 
-    for f in json_files:
-        raw_url = f["download_url"]
-        filename = f["name"]
-
-        file_response = requests.get(raw_url)
-        if file_response.status_code == 200:
-            try:
-                data = file_response.json()
-            except Exception:
-                st.error(f"❌ {filename} is not valid JSON")
-                continue
-
-            json_bytes = json.dumps(data, indent=2).encode("utf-8")
-
-            with st.expander(filename):
-                st.json(data)
-
-                st.download_button(
-                    label=f"⬇️ Download {filename}",
-                    data=json_bytes,
-                    file_name=filename,
-                    mime="application/json",
-                    key=filename
-                )
-        else:
-            st.warning(f"⚠️ Could not fetch {filename}")
+    # Download button
+    st.download_button(
+        label="⬇️ Download Workflow",
+        data=json.dumps(workflow_data, indent=2),
+        file_name="08b1gIbnNFYMbzhf.json",
+        mime="application/json"
+    )
 else:
-    st.error("❌ Could not list files from GitHub. Check repo/path/branch.")
+    st.error(f"❌ Failed to load file (HTTP {response.status_code})")
+

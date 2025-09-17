@@ -189,6 +189,15 @@ if lesson_id == "intro":
     st.markdown('<div class="lesson-card">', unsafe_allow_html=True)
     st.title("Course Introduction")
     
+    # Embedded video for Introduction
+    st.markdown("""
+    <div style="padding: 56.25% 0 0 0; position: relative">
+        <div style="height:100%;left:0;position:absolute;top:0;width:100%">
+            <iframe height="100%" width="100%;" src="https://embed.wave.video/9krwfjf82Rh2ihLP" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown('<div class="highlight-box">', unsafe_allow_html=True)
     st.markdown("### What You'll Learn")
     st.markdown("""
@@ -316,6 +325,15 @@ elif lesson_id == "ollama_setup":
     st.markdown('<div class="lesson-card">', unsafe_allow_html=True)
     st.title("Ollama Setup & Configuration")
     
+    # Embedded video for Ollama setup
+    st.markdown("""
+    <div style="padding: 56.25% 0 0 0; position: relative">
+        <div style="height:100%;left:0;position:absolute;top:0;width:100%">
+            <iframe height="100%" width="100%;" src="https://embed.wave.video/6wo392lMuElNrw3V" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("### Installing Ollama")
     
     if st.session_state.show_code_examples:
@@ -367,6 +385,15 @@ if st.button("Send"):
 elif lesson_id == "chatbot":
     st.markdown('<div class="lesson-card">', unsafe_allow_html=True)
     st.title("Build a Complete ChatGPT Clone")
+    
+    # Embedded video for ChatGPT clone
+    st.markdown("""
+    <div style="padding: 56.25% 0 0 0; position: relative">
+        <div style="height:100%;left:0;position:absolute;top:0;width:100%">
+            <iframe height="100%" width="100%;" src="https://embed.wave.video/qA6M90GV0M8JVcKb" frameborder="0" allow="autoplay; fullscreen" scrolling="no"></iframe>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     if st.session_state.show_code_examples:
         display_code_block("""# chatgpt_clone.py
